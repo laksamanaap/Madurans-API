@@ -14,8 +14,8 @@ class UserController extends Controller
      *     path="/get-users",
      *     tags={"Users"},
      *     summary="Returns a Sample API response",
-     *     description="Return all users registered",
-     *     operationId="greet",
+     *     description="A sample greeting to test out the API",
+     *     operationId="get-all-users",
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
@@ -23,7 +23,8 @@ class UserController extends Controller
      * )
      */
     public function getUsers() {
-      $users = DB::table('users')->get();  
+      $users = DB::table('users')->get();
+    
       return response()->json($users);
     } 
 }
