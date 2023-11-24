@@ -8,12 +8,12 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    
+
     /**
      * @OA\Get(
      *     path="/get-users",
      *     tags={"Users"},
-     *     summary="Returns a Sample API response",
+     *     summary="Get all users",
      *     description="A sample greeting to test out the API",
      *     operationId="get-all-users",
      *     @OA\Response(
@@ -24,7 +24,10 @@ class UserController extends Controller
      */
     public function getUsers() {
       $users = DB::table('users')->get();
-    
+
       return response()->json($users);
-    } 
+    }
+
+
+
 }

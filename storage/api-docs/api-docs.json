@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "http://127.0.0.1:8000/api",
-            "description": "Madurans Open API Server"
+            "description": "MADURANS API Server"
         }
     ],
     "paths": {
@@ -24,9 +24,9 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Returns a Sample API response",
+                "summary": "Get all users",
                 "description": "A sample greeting to test out the API",
-                "operationId": "greet",
+                "operationId": "get-all-users",
                 "responses": {
                     "default": {
                         "description": "successful operation"
