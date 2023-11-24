@@ -14,8 +14,8 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/api",
-            "description": "MADURANS API Server"
+            "url": "http://127.0.0.1:8000/api/",
+            "description": "Demo HOTEL API Server"
         }
     ],
     "paths": {
@@ -30,6 +30,51 @@
                 "responses": {
                     "default": {
                         "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "User Register API's",
+                "operationId": "ec3b0868507d87384580900d37d89ae2",
+                "requestBody": {
+                    "description": "- Register to your account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "laksamana"
+                                    },
+                                    "email": {
+                                        "type": "email",
+                                        "example": "laksamana.arya1412@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": "1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully Register"
+                    },
+                    "201": {
+                        "description": "Successfully Register"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }
