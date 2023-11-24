@@ -92,13 +92,14 @@ public function registerUsers(Request $request) {
     $token = $user->createToken('myAppToken')->plainTextToken;
 
     return response()->json([
+        'message' => 'Register Success',
         'data' => $user,
         'access_token' => $token,
         'token_type' => 'Bearer'
     ]);
 }
 
-     /**
+  /**
  * @OA\Post(
  *     path="/login",
  *     tags={"Users"},
@@ -114,37 +115,45 @@ public function registerUsers(Request $request) {
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Successfully Register",
+ *         description="Successfully Login",
  *      ),
  *     @OA\Response(
  *         response=201,
- *         description="Successfully Register",
+ *         description="Successfully Login",
  *      ),
  *      @OA\Response(
  *         response=400,
  *         description="Bad Request",
  *      ),
- *    )
- *
- * @return \Illuminate\Http\JsonResponse
+ * )
  */
+
 public function loginUsers(Request $request)
-    {
-        if (! Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        $user = User::where('email', $request->email)->firstOrFail();
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Login success',
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
+{
+    if (!Auth::attempt($request->only('email', 'password'))) {
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
+
+    if (!Auth::check()) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+    $user = Auth::user();
+
+    // Ensure the user is not null
+    if (!$user) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+    // Create a token for the user
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'message' => 'Login Success',
+        'data' => $user,
+        'access_token' => $token,
+        'token_type' => 'Bearer'
+    ]);
+}
 
 }

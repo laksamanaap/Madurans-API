@@ -113,10 +113,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successfully Register"
+                        "description": "Successfully Login"
                     },
                     "201": {
-                        "description": "Successfully Register"
+                        "description": "Successfully Login"
                     },
                     "400": {
                         "description": "Bad Request"
