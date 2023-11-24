@@ -24,3 +24,5 @@ Route::get('/get-users', [UserController::class, 'getUsers']);
 
 // Auth Customer Users
 Route::post('/register', [UserController::class, 'registerUsers']);
+Route::post('/login', [UserController::class, 'loginUsers']);
+

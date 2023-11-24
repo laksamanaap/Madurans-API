@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,8 +45,8 @@ class UserController extends Controller
  *              type="object",
  *              @OA\Property(property="username", type="string", example="laksamana"),
  *              @OA\Property(property="email", type="email", example="laksamana.arya1412@gmail.com"),
- *              @OA\Property(property="password", type="password", example="1234"),
- *              @OA\Property(property="password_confirmation", type="password", example="1234")
+ *              @OA\Property(property="password", type="string", example="1234"),
+ *              @OA\Property(property="password_confirmation", type="string", example="1234")
 
  *          )
  *     ),
@@ -67,12 +67,14 @@ class UserController extends Controller
  * @return \Illuminate\Http\JsonResponse
  */
 public function registerUsers(Request $request) {
+
     $validator = Validator::make($request->all(), [
         'username' => 'required|string',
         'email' => 'required|string',
         'password' => 'required|string|confirmed'
     ]);
 
+    // Validate
     if ($validator->fails()) {
         return response()->json(['error' => $validator->errors()], 400);
     }
@@ -80,16 +82,69 @@ public function registerUsers(Request $request) {
     $formField = $validator->validated();
 
     $formField['password'] = Hash::make($request->input('password'));
+
+     // Check if the email is already in use
+     if (User::where('email', $formField['email'])->exists()) {
+        return response()->json(['error' => 'Email is already in use.'], 409);
+    }
     $user = User::create($formField);
 
     $token = $user->createToken('myAppToken')->plainTextToken;
 
-    $response = [
-        'user' => $user,
-        'token' => $token
-    ];
-
-    return response($response, 201);
+    return response()->json([
+        'data' => $user,
+        'access_token' => $token,
+        'token_type' => 'Bearer'
+    ]);
 }
+
+     /**
+ * @OA\Post(
+ *     path="/login",
+ *     tags={"Users"},
+ *     summary="User Login API's",
+ *     @OA\RequestBody(
+ *          description= "- Login to your account",
+ *          required=true,
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="email", type="string", example="laksamana.arya1412@gmail.com"),
+ *              @OA\Property(property="password", type="string", example="1234")
+ *          )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successfully Register",
+ *      ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Successfully Register",
+ *      ),
+ *      @OA\Response(
+ *         response=400,
+ *         description="Bad Request",
+ *      ),
+ *    )
+ *
+ * @return \Illuminate\Http\JsonResponse
+ */
+public function loginUsers(Request $request)
+    {
+        if (! Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
+        $user = User::where('email', $request->email)->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Login success',
+            'access_token' => $token,
+            'token_type' => 'Bearer'
+        ]);
+    }
 
 }
