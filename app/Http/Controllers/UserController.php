@@ -46,6 +46,8 @@ class UserController extends Controller
  *              @OA\Property(property="username", type="string", example="laksamana"),
  *              @OA\Property(property="email", type="email", example="laksamana.arya1412@gmail.com"),
  *              @OA\Property(property="password", type="password", example="1234"),
+ *              @OA\Property(property="password_confirmation", type="password", example="1234")
+
  *          )
  *     ),
  *     @OA\Response(
