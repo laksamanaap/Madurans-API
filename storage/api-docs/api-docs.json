@@ -22,7 +22,7 @@
         "/get-users": {
             "get": {
                 "tags": [
-                    "Users"
+                    "User Authentication"
                 ],
                 "summary": "Get all users",
                 "description": "A sample greeting to test out the API",
@@ -37,7 +37,7 @@
         "/register": {
             "post": {
                 "tags": [
-                    "Users"
+                    "User Authentication"
                 ],
                 "summary": "User Register API's",
                 "operationId": "ec3b0868507d87384580900d37d89ae2",
@@ -86,7 +86,7 @@
         "/login": {
             "post": {
                 "tags": [
-                    "Users"
+                    "User Authentication"
                 ],
                 "summary": "User Login API's",
                 "operationId": "79b76db35ba369854a54bc016ebaed97",

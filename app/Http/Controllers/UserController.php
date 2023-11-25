@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
+    // Tes Commit
+
     /**
      * @OA\Get(
      *     path="/get-users",
-     *     tags={"Users"},
+     *     tags={"User Authentication"},
      *     summary="Get all users",
      *     description="A sample greeting to test out the API",
      *     operationId="get-all-users",
@@ -36,7 +38,7 @@ class UserController extends Controller
      /**
  * @OA\Post(
  *     path="/register",
- *     tags={"Users"},
+ *     tags={"User Authentication"},
  *     summary="User Register API's",
  *     @OA\RequestBody(
  *          description= "- Register to your account",
@@ -102,7 +104,7 @@ public function registerUsers(Request $request) {
   /**
  * @OA\Post(
  *     path="/login",
- *     tags={"Users"},
+ *     tags={"User Authentication"},
  *     summary="User Login API's",
  *     @OA\RequestBody(
  *          description= "- Login to your account",
