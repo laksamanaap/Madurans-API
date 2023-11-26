@@ -51,6 +51,7 @@
             "Composer\\Config::disableProcessTimeout",
             "phpunit"
         ]
+        
     },
     "extra": {
         "laravel": {
