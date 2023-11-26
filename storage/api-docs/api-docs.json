@@ -15,10 +15,113 @@
     "servers": [
         {
             "url": "http://127.0.0.1:8000/api/",
-            "description": "Demo HOTEL API Server"
+            "description": "Madurans API Server"
         }
     ],
     "paths": {
+        "/get-destinations": {
+            "get": {
+                "tags": [
+                    "Destination"
+                ],
+                "summary": "Get all destination",
+                "description": "A sample greeting to test out the API",
+                "operationId": "get-all-destination",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/get-destinations/{id_destinasi}": {
+            "post": {
+                "tags": [
+                    "Destination"
+                ],
+                "summary": "Get specific destinations",
+                "description": "Get specific destinations",
+                "operationId": "get-specific-destinations",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/create-destinations": {
+            "post": {
+                "tags": [
+                    "Destination"
+                ],
+                "summary": "Create Destination API's",
+                "operationId": "e2931bea341bca892c8e1cd0d0ee6fdc",
+                "requestBody": {
+                    "description": "Create Destination API's",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "images": {
+                                        "type": "string",
+                                        "example": "base64_image_1"
+                                    },
+                                    "title": {
+                                        "type": "email",
+                                        "example": "Kerapan Sapi"
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "4.6"
+                                    },
+                                    "trending": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "Pamekasan, Madura"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
+                                    },
+                                    "facilities": {
+                                        "type": "string",
+                                        "example": "Transport, Breakfast"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully Add Destination"
+                    },
+                    "201": {
+                        "description": "Successfully Add Destination"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [
@@ -27,6 +130,32 @@
                 "summary": "Get all users",
                 "description": "A sample greeting to test out the API",
                 "operationId": "get-all-users",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/get-users/{id_customer}": {
+            "post": {
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "Get specific users",
+                "description": "Get specific users",
+                "operationId": "get-specific-users",
+                "parameters": [
+                    {
+                        "name": "id_customer",
+                        "in": "path",
+                        "description": "id_customer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -129,7 +258,7 @@
                 "tags": [
                     "User Authentication"
                 ],
-                "summary": "Logout users",
+                "summary": "Users Logout API's",
                 "description": "A sample greeting to test out the API",
                 "operationId": "logout-users",
                 "responses": {

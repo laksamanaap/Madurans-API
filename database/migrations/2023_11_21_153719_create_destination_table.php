@@ -18,8 +18,8 @@ return new class extends Migration
             $table->float('rating');
             $table->boolean('trending');
             $table->string('location');
-            $table->longText('description');
-            $table->json('facilities');
+            $table->longText('description')->nullable();
+            $table->longText('facilities')->nullable();
             $table->timestamps();
         });
     }

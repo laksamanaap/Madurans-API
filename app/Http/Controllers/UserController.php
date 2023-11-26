@@ -36,6 +36,45 @@ class UserController extends Controller
       return response()->json($users);
     }
 
+      /**
+     * @OA\Post(
+     *     path="/get-users/{id_customer}",
+     *     tags={"User Authentication"},
+     *     summary="Get specific users",
+     *     description="Get specific users",
+     *     operationId="get-specific-users",
+     *     
+     * @OA\Parameter(
+     *          name="id_customer",
+     *          description="id_customer",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * 
+     * 
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getSpecificUsers($id)
+    {
+        $userData = User::where('users.id_customer',$id)
+        ->first();
+
+          if (!$userData) {
+        return response()->json(['message' => 'No user found for the specified id_customer'], 404);
+         } else {
+        return response()->json([
+            'data' => $userData
+        ]);
+    }
+
+    }
 
      /**
  * @OA\Post(
@@ -165,7 +204,7 @@ public function loginUsers(Request $request)
      * @OA\Get(
      *     path="/logout",
      *     tags={"User Authentication"},
-     *     summary="Logout users",
+     *     summary="Users Logout API's",
      *     description="A sample greeting to test out the API",
      *     operationId="logout-users",
      *     @OA\Response(
@@ -182,5 +221,8 @@ public function loginUsers(Request $request)
             'message' => 'Succesfully logout'    
         ],200);
     }
+
+
+
 
 }
