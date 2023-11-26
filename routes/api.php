@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // Middleware create soon
+
 // Auth Customer Users
 Route::get('/get-users', [UserController::class, 'getUsers']);
 Route::post('/get-users/{id_customer}', [UserController::class, 'getSpecificUsers']);
@@ -37,4 +38,11 @@ Route::post('/create-destinations', [DestinationController::class, 'createDestin
 Route::put('/update-destinations/{id_destinasi}', [DestinationController::class, 'updateDestinations']);
 Route::delete('/delete-destinations/{id_destinasi}', [DestinationController::class, 'deleteDestinations']);
 
+
+// Itinerary
+
+
+
+
+// Review
 
