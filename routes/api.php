@@ -34,7 +34,7 @@ Route::get('/logout', [UserController::class, 'logoutUsers']);
 Route::get('/get-destinations', [DestinationController::class, 'getDestinations']);
 Route::post('/get-destinations/{id_destinasi}', [DestinationController::class, 'getSpecificDestinations']);
 Route::post('/create-destinations', [DestinationController::class, 'createDestinations']);
-Route::post('/update-destinations/{id_destination}', [DestinationController::class, 'updateDestinations']);
-Route::post('/delete-destinations/{id_destination}', [DestinationController::class, 'deleteDestinations']);
+Route::put('/update-destinations/{id_destinasi}', [DestinationController::class, 'updateDestinations']);
+Route::delete('/delete-destinations/{id_destinasi}', [DestinationController::class, 'deleteDestinations']);
 
 

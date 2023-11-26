@@ -122,6 +122,92 @@
                 }
             }
         },
+        "/update-destinations/{id_destinasi}": {
+            "put": {
+                "tags": [
+                    "Destination"
+                ],
+                "summary": "Update destination",
+                "operationId": "c3671c3fe1647504b0348a227d953e33",
+                "requestBody": {
+                    "description": "- Update destination",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_destinasi": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "images": {
+                                        "type": "string",
+                                        "example": "base64_image_1"
+                                    },
+                                    "title": {
+                                        "type": "email",
+                                        "example": "Kerapan Sapi"
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "4.6"
+                                    },
+                                    "trending": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "Pamekasan, Madura"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
+                                    },
+                                    "facilities": {
+                                        "type": "string",
+                                        "example": "Transport, Breakfast"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get token"
+                    }
+                }
+            }
+        },
+        "/delete-destinations/{id_destinasi}": {
+            "delete": {
+                "tags": [
+                    "Destination"
+                ],
+                "summary": "Delete destination",
+                "description": "Delete Destination API's",
+                "operationId": "delete-destination",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [

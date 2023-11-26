@@ -135,4 +135,107 @@ class DestinationController extends Controller
         ],200);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/update-destinations/{id_destinasi}",
+     *     tags={"Destination"},
+     *     summary="Update destination",
+     *     @OA\RequestBody(
+     *          description= "- Update destination",
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id_destinasi", type="int", example="1"),
+     *              @OA\Property(property="images", type="string", example="base64_image_1"),
+     *              @OA\Property(property="title", type="email", example="Kerapan Sapi"),
+     *              @OA\Property(property="rating", type="float", example="4.6"),
+     *              @OA\Property(property="trending", type="boolean", example=true),
+     *              @OA\Property(property="location", type="string", example="Pamekasan, Madura"),
+     *              @OA\Property(property="description", type="string", 
+     *                  example="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
+     *              ),
+     *              @OA\Property(property="facilities", type="string", example="Transport, Breakfast")
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="get token",
+     *      ),
+     *    )
+     *
+     *
+     */
+
+     public function updateDestinations(Request $request, $id_destinasi)
+     {
+        
+        $requestData = $request->only([
+            'id_destinasi',
+            'images',
+            'title',
+            'rating',
+            'trending',
+            'location',
+            'description',
+            'facilities',
+        ]);
+    
+        $id_destinasi = $requestData['id_destinasi'];
+        $imagesDestinasi = $requestData['images'];
+        $titleDestinasi = $requestData['title'];
+        $ratingDestinasi = $requestData['rating'];
+        $trendingDestinasi = $requestData['trending'];
+        $locationDestinasi = $requestData['location'];
+        $descriptionDestinasi = $requestData['description'];
+        $facilitiesDestinasi = $requestData['facilities']; 
+    
+        $Destination = Destination::find($id_destinasi);
+        $Destination->images = $imagesDestinasi;
+        $Destination->title = $titleDestinasi;
+        $Destination->rating = $ratingDestinasi;
+        $Destination->trending = $trendingDestinasi;
+        $Destination->location = $locationDestinasi;
+        $Destination->description = $descriptionDestinasi;
+        $Destination->facilities = $facilitiesDestinasi;
+     
+        $Destination->save();
+        return response()->json([
+            'message' => 'Succesfully update data destination',
+            'data' => $Destination
+        ],200);
+    
+     } 
+
+
+     /**
+     * @OA\delete(
+     *     path="/delete-destinations/{id_destinasi}",
+     *     tags={"Destination"},
+     *     summary="Delete destination",
+     *     description="Delete Destination API's",
+     *     operationId="delete-destination",
+     *       @OA\Parameter(
+     *          name="id_destinasi",
+     *          description="id_destinasi",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function deleteDestinations($id_destinasi) {
+      $destination = Destination::destroy($id_destinasi);
+
+      return response()->json([
+        'message' => 'Succesfully delete destination',
+        'data' => $destination
+      ]);
+    }
+
 }
