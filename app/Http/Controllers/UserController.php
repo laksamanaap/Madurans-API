@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -99,7 +100,7 @@ public function registerUsers(Request $request) {
         'data' => $user,
         'access_token' => $token,
         'token_type' => 'Bearer'
-    ]);
+    ],200);
 }
 
   /**
@@ -141,6 +142,7 @@ public function loginUsers(Request $request)
         return response()->json(['message' => 'Unauthorized'], 401);
     }
 
+    // Initialize user
     $user = Auth::user();
 
     // Ensure the user is not null
@@ -156,7 +158,29 @@ public function loginUsers(Request $request)
         'data' => $user,
         'access_token' => $token,
         'token_type' => 'Bearer'
-    ]);
+    ],200);
 }
+
+    /**
+     * @OA\Get(
+     *     path="/logout",
+     *     tags={"User Authentication"},
+     *     summary="Logout users",
+     *     description="A sample greeting to test out the API",
+     *     operationId="logout-users",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function logoutUsers(Request $request) {
+        Session::flush();
+        Auth::logout();
+
+        return response()->json([
+            'message' => 'Succesfully logout'    
+        ],200);
+    }
 
 }

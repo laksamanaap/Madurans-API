@@ -123,6 +123,21 @@
                     }
                 }
             }
+        },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "Logout users",
+                "description": "A sample greeting to test out the API",
+                "operationId": "logout-users",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
         }
     }
 }
