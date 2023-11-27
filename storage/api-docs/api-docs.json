@@ -208,6 +208,47 @@
                 }
             }
         },
+        "/get-itinerary": {
+            "get": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Get all itinerary",
+                "description": "A sample greeting to test out the API",
+                "operationId": "get-all-itinerary",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/get-itinerary/{id_itinerary}": {
+            "post": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Get specific itinerary",
+                "description": "Get specific itinerary",
+                "operationId": "get-specific-itinerary",
+                "parameters": [
+                    {
+                        "name": "id_itinerary",
+                        "in": "path",
+                        "description": "id_itinerary",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [

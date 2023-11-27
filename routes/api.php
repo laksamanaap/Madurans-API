@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\DestinationController;
 
 
@@ -40,7 +41,11 @@ Route::delete('/delete-destinations/{id_destinasi}', [DestinationController::cla
 
 
 // Itinerary
-
+Route::get('/get-itinerary', [ItineraryController::class, 'getItinerary']);
+Route::post('/get-itinerary/{id_itinerary}', [ItineraryController::class, 'getSpecificItinerary']);
+Route::post('/create-itinerary', [ItineraryController::class, 'createItinerary']);
+Route::put('/update-itinerary/{id_itinerary}', [ItineraryController::class, 'updateItinerary']);
+Route::delete('/delete-itinerary/{id_itinerary}', [ItineraryController::class, 'deleteItinerary']);
 
 
 
