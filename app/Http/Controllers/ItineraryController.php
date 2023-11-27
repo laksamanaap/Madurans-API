@@ -69,6 +69,42 @@ class ItineraryController extends Controller
 
     }
 
+    
+      /**
+     * @OA\Get(
+     *     path="/get-itinerary/{id_destinasi}",
+     *     tags={"Itinerary"},
+     *     summary="Get specific destination spesific itinerary ",
+     *     description="Get specific destination spesific itinerary ",
+     *     operationId="ShowItineraryList",
+     *     
+     * @OA\Parameter(
+     *          name="id_destinasi",
+     *          description="id_destinasi",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * 
+     * 
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getSpecificItineraryFromDestination($id_destinasi) {
+        $ItineraryData = Itinerary::where('itinerary.id_destinasi',$id_destinasi)
+        ->with('itinerary_list')
+        ->first();
+
+        return response()->json([
+            'data' => $ItineraryData
+        ]);
+    }
+
 
      /**
      * @OA\Post(
@@ -211,4 +247,6 @@ class ItineraryController extends Controller
             'data' => $Itinerary
         ]);
     }
+
+
 }

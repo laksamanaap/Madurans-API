@@ -249,6 +249,32 @@
                 }
             }
         },
+        "/get-itinerary/{id_destinasi}": {
+            "get": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Get specific destination spesific itinerary ",
+                "description": "Get specific destination spesific itinerary ",
+                "operationId": "ShowItineraryList",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/create-itinerary": {
             "post": {
                 "tags": [
