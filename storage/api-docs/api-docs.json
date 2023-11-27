@@ -249,6 +249,51 @@
                 }
             }
         },
+        "/create-itinerary": {
+            "post": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Create Itinerary API's",
+                "operationId": "c68d7f453ed3bcbd3505716d5a513553",
+                "requestBody": {
+                    "description": "Create Itinerary API's",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "itinerary_day": {
+                                        "type": "string",
+                                        "example": "1 Day"
+                                    },
+                                    "itinerary_location_description": {
+                                        "type": "string",
+                                        "example": "Sampai di pamekasan"
+                                    },
+                                    "itinerary_description": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ipsum ipsum, scelerisque eget nisi sed, tempus ornare dui. Morbi volutpat, tortor dictum porta aliquam, ligula dolor gravida massa, ut blandit tortor nulla eget erat. In hac habitasse platea dictumst. In efficitur id dui at maximus"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully Add Itinerary"
+                    },
+                    "201": {
+                        "description": "Successfully Add Itinerary"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [

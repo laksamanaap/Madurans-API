@@ -6,6 +6,7 @@ use App\Models\Itinerary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ItineraryController extends Controller
 {
@@ -66,5 +67,61 @@ class ItineraryController extends Controller
             return response()->json($ItineraryData);
         }
 
+    }
+
+
+     /**
+     * @OA\Post(
+     *     path="/create-itinerary",
+     *     tags={"Itinerary"},
+     *     summary="Create Itinerary API's",
+     *     @OA\RequestBody(
+     *          description= "Create Itinerary API's",
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="itinerary_day", type="string", example="1 Day"),
+     *              @OA\Property(property="itinerary_location_description", type="string", example="Sampai di pamekasan"),
+     *              @OA\Property(property="itinerary_description", type="string", example="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ipsum ipsum, scelerisque eget nisi sed, tempus ornare dui. Morbi volutpat, tortor dictum porta aliquam, ligula dolor gravida massa, ut blandit tortor nulla eget erat. In hac habitasse platea dictumst. In efficitur id dui at maximus")
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully Add Itinerary",
+     *      ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successfully Add Itinerary",
+     *      ),
+     *      @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *      ),
+     * )
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createItinerary(Request $request) {
+        
+        $validator = Validator::make($request->all(),[
+            'itinerary_day' => 'required|string',
+            'itinerary_location_description' => 'required|string',
+            'itinerary_description' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                ['error' => $validator->errors()
+            ],400);
+        }
+
+        $formFields = $validator->validate();
+
+        $Itinerary = Itinerary::create($formFields);
+
+        return response()->json([
+            'message' => 'Itinerary successfuly created',
+            'data' => $Itinerary
+        ]);
     }
 }
