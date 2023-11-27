@@ -124,4 +124,91 @@ class ItineraryController extends Controller
             'data' => $Itinerary
         ]);
     }
+
+
+     /**
+     * @OA\Put(
+     *     path="/update-itinerary/{id_itinerary}",
+     *     tags={"Itinerary"},
+     *     summary="Update Itinerary",
+     *     @OA\RequestBody(
+     *          description= "- Update Itinerary",
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id_itinerary", type="int", example="1"),
+     *              @OA\Property(property="itinerary_day", type="string", example="Day 1"),
+     *              @OA\Property(property="itinerary_location_description", type="string", example="Sampai di Pamekasan, Madura"),
+     *              @OA\Property(property="itinerary_description", type="string", example="Ini deskripsi itinerary")
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="get token",
+     *      ),
+     *    )
+     *
+     *
+     */
+    public function updateItinerary(Request $request, $id_itinerary) {
+
+        $requestData = $request->only([
+            'id_itinerary',
+            'itinerary_day',
+            'itinerary_location_description',
+            'itinerary_description'
+        ]);
+
+        $id_itinerary = $requestData['id_itinerary'];
+        $itinerary_day = $requestData['itinerary_day'];
+        $itinerary_location_description = $requestData['itinerary_location_description'];
+        $itinerary_description = $requestData['itinerary_description'];
+
+        $Itinerary = Itinerary::find( $id_itinerary);
+        $Itinerary->itinerary_day = $itinerary_day;
+        $Itinerary->itinerary_location_description = $itinerary_location_description;
+        $Itinerary->itinerary_description = $itinerary_description;
+
+        $Itinerary->save();
+
+        return response()->json([
+            'message' => 'Succesfully update itinerary',
+            'data' => $Itinerary
+        ],200);
+
+    }
+
+
+
+     /**
+     * @OA\delete(
+     *     path="/delete-itinerary/{id_itinerary}",
+     *     tags={"Itinerary"},
+     *     summary="Delete Itinerary API's",
+     *     description="Delete Itinerary API's",
+     *     operationId="delete-Itinerary",
+     *       @OA\Parameter(
+     *          name="id_itinerary",
+     *          description="id_itinerary",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function deleteItinerary($id_itinerary) {
+
+        $Itinerary = Itinerary::destroy($id_itinerary);
+
+        return response()->json([
+            'message' => 'Succesfully delete itinerary',
+            'data' => $Itinerary
+        ]);
+    }
 }

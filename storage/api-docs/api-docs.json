@@ -294,6 +294,75 @@
                 }
             }
         },
+        "/update-itinerary/{id_itinerary}": {
+            "put": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Update Itinerary",
+                "operationId": "b384729bda77500f3f2e18e15caeec21",
+                "requestBody": {
+                    "description": "- Update Itinerary",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_itinerary": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "itinerary_day": {
+                                        "type": "string",
+                                        "example": "Day 1"
+                                    },
+                                    "itinerary_location_description": {
+                                        "type": "string",
+                                        "example": "Sampai di Pamekasan, Madura"
+                                    },
+                                    "itinerary_description": {
+                                        "type": "string",
+                                        "example": "Ini deskripsi itinerary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get token"
+                    }
+                }
+            }
+        },
+        "/delete-itinerary/{id_itinerary}": {
+            "delete": {
+                "tags": [
+                    "Itinerary"
+                ],
+                "summary": "Delete Itinerary API's",
+                "description": "Delete Itinerary API's",
+                "operationId": "delete-Itinerary",
+                "parameters": [
+                    {
+                        "name": "id_itinerary",
+                        "in": "path",
+                        "description": "id_itinerary",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [
