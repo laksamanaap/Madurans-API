@@ -74,8 +74,8 @@ class ItineraryController extends Controller
      * @OA\Get(
      *     path="/get-itinerary/{id_destinasi}",
      *     tags={"Itinerary"},
-     *     summary="Get specific destination spesific itinerary ",
-     *     description="Get specific destination spesific itinerary ",
+     *     summary="Get specific destination itinerary ",
+     *     description="Get specific destination itinerary ",
      *     operationId="ShowItineraryList",
      *     
      * @OA\Parameter(
