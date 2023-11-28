@@ -151,18 +151,23 @@ class ItineraryController extends Controller
         }
 
         $formFields = $validator->validate();
-
         $formFields['id_destinasi'] = $request->input('id_destinasi');
 
-        try {
-            $itinerary = Itinerary::create($formFields);
+        $destination = Destination::find($formFields['id_destinasi']);
 
-            return response()->json([
-                'message' => 'Itinerary successfully created',
-                'data' => $itinerary
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to create itinerary.'], 500);
+        if(!$destination){
+            return response()->json(['error' => 'Destination not found.'], 404);
+        } else {
+            try {
+                $itinerary = Itinerary::create($formFields);
+
+                return response()->json([
+                    'message' => 'Itinerary successfully created',
+                    'data' => $itinerary
+                ], 201);
+            } catch (Exception $e) {
+                return response()->json(['error' => 'Failed to create itinerary.'], 500);
+            }
         }
     }
 
