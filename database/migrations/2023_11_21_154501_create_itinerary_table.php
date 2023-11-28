@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('itinerary', function (Blueprint $table) {
             $table->id('id_itinerary');
+            $table->unsignedBigInteger('id_destinasi')->nullable();
             $table->string('itinerary_day');
             $table->string('itinerary_location_description');
             $table->longText('itinerary_description');
             $table->timestamps();
+
+            // Foreign key
+            $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');
         });
     }
 

@@ -289,6 +289,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "id_destinasi": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
                                     "itinerary_day": {
                                         "type": "string",
                                         "example": "1 Day"

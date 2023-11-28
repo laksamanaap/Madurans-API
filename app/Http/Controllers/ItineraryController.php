@@ -116,6 +116,7 @@ class ItineraryController extends Controller
      *          required=true,
      *          @OA\JsonContent(
      *              type="object",
+     *              @OA\Property(property="id_destinasi", type="number", example="1"),
      *              @OA\Property(property="itinerary_day", type="string", example="1 Day"),
      *              @OA\Property(property="itinerary_location_description", type="string", example="Sampai di pamekasan"),
      *              @OA\Property(property="itinerary_description", type="string", example="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ipsum ipsum, scelerisque eget nisi sed, tempus ornare dui. Morbi volutpat, tortor dictum porta aliquam, ligula dolor gravida massa, ut blandit tortor nulla eget erat. In hac habitasse platea dictumst. In efficitur id dui at maximus")
@@ -140,6 +141,7 @@ class ItineraryController extends Controller
     public function createItinerary(Request $request) {
         
         $validator = Validator::make($request->all(),[
+            'id_destinasi' => 'required|numeric',
             'itinerary_day' => 'required|string',
             'itinerary_location_description' => 'required|string',
             'itinerary_description' => 'required|string'
