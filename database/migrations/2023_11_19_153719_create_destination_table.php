@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('destination', function (Blueprint $table) {
             $table->id('id_destinasi');
-            $table->unsignedBigInteger('id_itinerary')->nullable(); // Foreign key to itinerary table
             $table->binary('images');
             $table->string('title');
             $table->float('rating');
@@ -22,9 +21,10 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->longText('facilities')->nullable();
             $table->timestamps();
-
-            // $table->foreign('id_itinerary')->references('id_itinerary')->on('itinerary')
-            // ->onDelete('set null');
+            
+            // Foreign key to itinerary table
+            // $table->unsignedBigInteger('id_itinerary')->nullable(); // Foreign key to itinerary table
+            // $table->foreign('id_itinerary')->references('id_itinerary')->on('itinerary');
         });
     }
 

@@ -16,6 +16,7 @@ class Destination extends Model
 
     
       protected $fillable = [
+        'id_itinerary',
         'images',
         'title',
         'rating',

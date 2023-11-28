@@ -12,7 +12,6 @@ class Itinerary extends Model
     protected $table = 'itinerary';
     protected $guarded = [];
 
-    
       protected $fillable = [
         'id_destinasi',
         'itinerary_day',

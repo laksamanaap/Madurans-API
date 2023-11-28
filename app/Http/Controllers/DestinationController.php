@@ -56,7 +56,8 @@ class DestinationController extends Controller
      */
     public function getSpecificDestinations($id)
     {
-        $destinationData = Destination::where('destination.id_destinasi',$id)
+        $destinationData = Destination::with('itinerary')
+        ->where('destination.id_destinasi', $id)
         ->first();
 
           if (!$destinationData) {

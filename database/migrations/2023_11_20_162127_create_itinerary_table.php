@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('itinerary_day');
             $table->string('itinerary_location_description');
             $table->longText('itinerary_description');
-            $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');
             $table->timestamps();
+        
+            // Foreign key to destination table
+            $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');
+
         });
     }
 
