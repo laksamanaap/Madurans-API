@@ -14,6 +14,7 @@ class Itinerary extends Model
 
     
       protected $fillable = [
+        'id_destinasi',
         'itinerary_day',
         'itinerary_location_description',
         'itinerary_description',

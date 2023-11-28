@@ -25,9 +25,9 @@ class Destination extends Model
         'facilities',
     ];
 
-    public function itinerary_list() :HasMany
+    public function itinerary() :HasMany
     {
-        return $this->hasMany(Itinerary::class, 'id_itinerary', 'id_itinerary');
+        return $this->hasMany(Itinerary::class, 'id_destinasi', 'id_destinasi');
     }
 
     use HasFactory;

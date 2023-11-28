@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Itinerary;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -96,12 +97,10 @@ class ItineraryController extends Controller
      * )
      */
     public function getSpecificItineraryFromDestination($id_destinasi) {
-        $ItineraryData = Itinerary::where('itinerary.id_destinasi',$id_destinasi)
-        ->with('itinerary_list')
-        ->first();
+        $destinationData = Destination::with('itinerary')->find($id_destinasi);
 
         return response()->json([
-            'data' => $ItineraryData
+            'data' => $destinationData,
         ]);
     }
 
@@ -140,27 +139,31 @@ class ItineraryController extends Controller
      */
     public function createItinerary(Request $request) {
         
-        $validator = Validator::make($request->all(),[
-            'id_destinasi' => 'required|numeric',
-            'itinerary_day' => 'required|string',
-            'itinerary_location_description' => 'required|string',
-            'itinerary_description' => 'required|string'
+       $validator = Validator::make($request->all(), [
+        'id_destinasi' => 'required|numeric',
+        'itinerary_day' => 'required|string',
+        'itinerary_location_description' => 'required|string',
+        'itinerary_description' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(
-                ['error' => $validator->errors()
-            ],400);
+            return response()->json(['error' => $validator->errors()], 400);
         }
 
         $formFields = $validator->validate();
 
-        $Itinerary = Itinerary::create($formFields);
+        $formFields['id_destinasi'] = $request->input('id_destinasi');
 
-        return response()->json([
-            'message' => 'Itinerary successfuly created',
-            'data' => $Itinerary
-        ]);
+        try {
+            $itinerary = Itinerary::create($formFields);
+
+            return response()->json([
+                'message' => 'Itinerary successfully created',
+                'data' => $itinerary
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create itinerary.'], 500);
+        }
     }
 
 

@@ -24,7 +24,7 @@ class DestinationController extends Controller
      * )
      */
     public function getDestinations() {
-      $destination = DB::table('destination')->get();
+      $destination = Destination::with('itinerary')->get();
 
       return response()->json($destination);
     }

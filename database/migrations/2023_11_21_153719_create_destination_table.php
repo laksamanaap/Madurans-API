@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('destination', function (Blueprint $table) {
             $table->id('id_destinasi');
-            // $table->unsignedBigInteger('id_itinerary')->nullable(); // Foreign key to itinerary table
+            $table->unsignedBigInteger('id_itinerary')->nullable(); // Foreign key to itinerary table
             $table->binary('images');
             $table->string('title');
             $table->float('rating');
