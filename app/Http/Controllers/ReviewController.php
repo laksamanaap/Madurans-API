@@ -117,9 +117,7 @@ class ReviewController extends Controller
         $destination = Destination::find($formData['id_destinasi']);
 
         if (!$destination) {
-            return response()->json([
-                'error' => 'Destination not found'
-            ]);
+            return response()->json(['error' => 'Destination not found.'], 404);
         } else {
             try {
                 $review = Review::create($formData);

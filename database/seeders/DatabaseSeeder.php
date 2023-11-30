@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
         UserSeeder::class,
-        DestinationSeeder::class,
-        ItinerarySeeder::class,
-        ReviewSeeder::class,
+        // DestinationSeeder::class,
+        // ItinerarySeeder::class,
+        // ReviewSeeder::class,
         ]);
         
     }
