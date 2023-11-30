@@ -51,4 +51,9 @@ Route::delete('/delete-itinerary/{id_itinerary}', [ItineraryController::class, '
 
 
 // Review
-
+Route::get('/get-review', [ReviewController::class, 'getReview']);
+Route::post('/get-review/{id_review}', [ReviewController::class, 'getSpecificReview']);
+Route::get('/get-review/{id_destinasi}', [ReviewController::class, 'getSpecificReviewFromDestination']);
+Route::post('/create-review', [ReviewController::class, 'createReview']);
+Route::put('/update-review/{id_review}', [ReviewController::class, 'updateReview']);
+Route::delete('/delete-review/{id_review}', [ReviewController::class, 'deleteReview']);
