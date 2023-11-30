@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         DestinationSeeder::class,
         ItinerarySeeder::class,
+        ReviewSeeder::class,
         ]);
         
     }

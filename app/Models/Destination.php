@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -29,6 +30,11 @@ class Destination extends Model
     public function itinerary() :HasMany
     {
         return $this->hasMany(Itinerary::class, 'id_destinasi', 'id_destinasi');
+    }
+
+    public function review() :HasMany
+    {
+        return $this->hasMany(Review::class, 'id_destinasi', 'id_destinasi');
     }
 
     use HasFactory;

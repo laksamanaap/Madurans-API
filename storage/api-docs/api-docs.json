@@ -393,6 +393,92 @@
                 }
             }
         },
+        "/get-review": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Get all Review",
+                "description": "A sample greeting to test out the API",
+                "operationId": "get-all-Review",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/get-review/{id_destinasi}": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Get specific destination Review ",
+                "description": "Get specific destination Review ",
+                "operationId": "ShowReviewList",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/create-review": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Create Review API's",
+                "operationId": "cb3d202a1abe94d4be1791ba1276c81b",
+                "requestBody": {
+                    "description": "Create Review API's",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_destinasi": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "example": "4"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Destinasi wisata kerapan sapi di Madura menyajikan pengalaman seru dengan perpaduan tradisi dan kecepatan. Acara ini tidak hanya menyuguhkan pertandingan seru antara sapi yang berlomba dengan kecepatan tinggi, tetapi juga memperkenalkan pengunjung pada keindahan budaya Madura."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully Add Review"
+                    },
+                    "201": {
+                        "description": "Successfully Add Review"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [

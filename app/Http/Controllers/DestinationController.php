@@ -24,7 +24,7 @@ class DestinationController extends Controller
      * )
      */
     public function getDestinations() {
-      $destination = Destination::with('itinerary')->get();
+      $destination = Destination::with('itinerary','review')->get();
 
       return response()->json($destination);
     }
@@ -56,7 +56,7 @@ class DestinationController extends Controller
      */
     public function getSpecificDestinations($id)
     {
-        $destinationData = Destination::with('itinerary')
+        $destinationData = Destination::with('itinerary','review')
         ->where('destination.id_destinasi', $id)
         ->first();
 
