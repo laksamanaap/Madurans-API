@@ -479,6 +479,72 @@
                 }
             }
         },
+        "/update-review/{id_review}": {
+            "put": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Update Review",
+                "operationId": "f0a342ff1925f97f191c62a397b2f98f",
+                "requestBody": {
+                    "description": "- Update Review",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_review": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "4"
+                                    },
+                                    "description": {
+                                        "type": "email",
+                                        "example": "Review Description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get token"
+                    }
+                }
+            }
+        },
+        "/delete-review/{id_review}": {
+            "delete": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Delete review API's",
+                "description": "Delete review API's",
+                "operationId": "delete-review",
+                "parameters": [
+                    {
+                        "name": "id_review",
+                        "in": "path",
+                        "description": "id_review",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-users": {
             "get": {
                 "tags": [

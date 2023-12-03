@@ -143,6 +143,7 @@ class ReviewController extends Controller
      *          required=true,
      *          @OA\JsonContent(
      *              type="object",
+     *              @OA\Property(property="id_destinasi", type="number", example="1"),
      *              @OA\Property(property="id_review", type="int", example="1"),
      *              @OA\Property(property="rating", type="float", example="4"),
      *              @OA\Property(property="description", type="email", example="Review Description")
@@ -160,16 +161,24 @@ class ReviewController extends Controller
     
        $requestData = $request->only([
            'id_review',
+           'id_destinasi',
            'rating',
            'description',
        ]);
 
        $id_review = $requestData['id_review'];
+       $id_destinasi = $requestData['id_destinasi'];
        $rating = $requestData['rating'];
        $description = $requestData['description'];
 
        $Review = Review::find($id_review);
+
+       if (!$Review) {
+        return response()->json('Review not found', 404);
+       } 
+
        $Review->id_review = $id_review;
+       $Review->id_destinasi = $id_destinasi;
        $Review->rating = $rating;
        $Review->description = $description;
 
