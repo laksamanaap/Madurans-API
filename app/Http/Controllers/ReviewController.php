@@ -26,7 +26,7 @@ class ReviewController extends Controller
      */
     public function getReview(Request $request) {
 
-        $Review = DB::table('review')->get();
+       $Review = Review::with('users')->get();
 
         return response()->json($Review);
     }
@@ -77,6 +77,7 @@ class ReviewController extends Controller
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="id_destinasi", type="number", example="1"),
+     *              @OA\Property(property="id_customer", type="number", example="1"),
      *              @OA\Property(property="rating", type="number", example="4"),
      *              @OA\Property(property="description", type="string", example="Destinasi wisata kerapan sapi di Madura menyajikan pengalaman seru dengan perpaduan tradisi dan kecepatan. Acara ini tidak hanya menyuguhkan pertandingan seru antara sapi yang berlomba dengan kecepatan tinggi, tetapi juga memperkenalkan pengunjung pada keindahan budaya Madura."),
      *          )
@@ -101,6 +102,7 @@ class ReviewController extends Controller
         
         $validator = Validator::make($request->all(), [
             'id_destinasi' => 'required|numeric',
+            'id_customer' => 'required|numeric',
             'rating' => 'required|numeric',
             'description' => 'required|string',
         ]);
@@ -123,7 +125,7 @@ class ReviewController extends Controller
                 $review = Review::create($formData);
 
                  return response()->json([
-                    'message' => 'Itinerary successfully created',
+                    'message' => 'Review successfully created',
                     'data' => $review
                 ], 201);
             } catch (Exception $e) {

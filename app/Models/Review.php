@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
@@ -14,6 +16,7 @@ class Review extends Model
 
       protected $fillable = [
         'id_destinasi',
+        'id_customer',
         'id_review',
         'rating',
         'description',
@@ -22,6 +25,11 @@ class Review extends Model
     public function review() :BelongsTo
     {
         return $this->belongsTo(Destination::class, 'id_review', 'id_review');
+    }
+
+    public function users(): HasOne
+    {
+        return $this->hasOne(User::class, 'id_customer', 'id_customer');
     }
 
     use HasFactory;

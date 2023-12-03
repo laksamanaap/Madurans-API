@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('review', function (Blueprint $table) {
             $table->id('id_review');
             $table->unsignedBigInteger('id_destinasi')->nullable();
+            $table->unsignedBigInteger('id_customer')->nullable();
             $table->float('rating');
             $table->longText('description');
             $table->timestamps();
 
             // Foreign key to destination table
             $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');
+            $table->foreign('id_customer')->references('id_customer')->on('users');
+
         });
     }
 
