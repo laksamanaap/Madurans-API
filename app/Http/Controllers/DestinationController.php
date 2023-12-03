@@ -89,7 +89,6 @@ class DestinationController extends Controller
      *              @OA\Property(property="description", type="string", 
      *                  example="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
      *              ),
-     *              @OA\Property(property="facilities", type="string", example="Transport, Breakfast")
      *          )
      *     ),
      *     @OA\Response(
@@ -117,7 +116,7 @@ class DestinationController extends Controller
             'trending' => 'required|boolean',
             'location' => 'required|string',
             'description' => 'required|string',
-            'facilities' => 'required|string'
+            // 'facilities' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -155,7 +154,6 @@ class DestinationController extends Controller
      *              @OA\Property(property="description", type="string", 
      *                  example="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
      *              ),
-     *              @OA\Property(property="facilities", type="string", example="Transport, Breakfast")
      *          )
      *     ),
      *     @OA\Response(
@@ -178,7 +176,6 @@ class DestinationController extends Controller
             'trending',
             'location',
             'description',
-            'facilities',
         ]);
     
         $id_destinasi = $requestData['id_destinasi'];
@@ -188,7 +185,6 @@ class DestinationController extends Controller
         $trendingDestinasi = $requestData['trending'];
         $locationDestinasi = $requestData['location'];
         $descriptionDestinasi = $requestData['description'];
-        $facilitiesDestinasi = $requestData['facilities']; 
     
         $Destination = Destination::find($id_destinasi);
         $Destination->images = $imagesDestinasi;
@@ -197,7 +193,6 @@ class DestinationController extends Controller
         $Destination->trending = $trendingDestinasi;
         $Destination->location = $locationDestinasi;
         $Destination->description = $descriptionDestinasi;
-        $Destination->facilities = $facilitiesDestinasi;
      
         $Destination->save();
         return response()->json([

@@ -98,10 +98,6 @@
                                     "description": {
                                         "type": "string",
                                         "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
-                                    },
-                                    "facilities": {
-                                        "type": "string",
-                                        "example": "Transport, Breakfast"
                                     }
                                 },
                                 "type": "object"
@@ -164,10 +160,6 @@
                                     "description": {
                                         "type": "string",
                                         "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec erat felis. Nunc vitae quam eget leo venenatis vulputate in ut ante. Aenean vel lacus ac purus interdum gravida non id velit. Vivamus sit amet vehicula ante, non tristique leo. Duis iaculis feugiat metus quis posuere. Maecenas tristique, justo et porttitor dignissim, ipsum magna hendrerit neque, a egestas quam nulla nec ante. Maecenas at molestie tellus, eu laoreet augue."
-                                    },
-                                    "facilities": {
-                                        "type": "string",
-                                        "example": "Transport, Breakfast"
                                     }
                                 },
                                 "type": "object"
@@ -204,6 +196,65 @@
                 "responses": {
                     "default": {
                         "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/get-facilities": {
+            "get": {
+                "tags": [
+                    "Facilities"
+                ],
+                "summary": "Get all facilities",
+                "description": "A sample greeting to test out the API",
+                "operationId": "get-all-facilities",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/create-facilities": {
+            "post": {
+                "tags": [
+                    "Facilities"
+                ],
+                "summary": "Create Facilities API's",
+                "operationId": "05dac55ed40fa43c6430b4e1df93039b",
+                "requestBody": {
+                    "description": "Create Facilities API's",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_destinasi": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "facility_name": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "Sleeping Room"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }

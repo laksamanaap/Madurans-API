@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\DestinationController;
 
 
@@ -40,7 +41,6 @@ Route::post('/create-destinations', [DestinationController::class, 'createDestin
 Route::put('/update-destinations/{id_destinasi}', [DestinationController::class, 'updateDestinations']);
 Route::delete('/delete-destinations/{id_destinasi}', [DestinationController::class, 'deleteDestinations']);
 
-
 // Itinerary
 Route::get('/get-itinerary', [ItineraryController::class, 'getItinerary']);
 Route::post('/get-itinerary/{id_itinerary}', [ItineraryController::class, 'getSpecificItinerary']);
@@ -49,8 +49,6 @@ Route::post('/create-itinerary', [ItineraryController::class, 'createItinerary']
 Route::put('/update-itinerary/{id_itinerary}', [ItineraryController::class, 'updateItinerary']);
 Route::delete('/delete-itinerary/{id_itinerary}', [ItineraryController::class, 'deleteItinerary']);
 
-
-
 // Review
 Route::get('/get-review', [ReviewController::class, 'getReview']);
 Route::post('/get-review/{id_review}', [ReviewController::class, 'getSpecificReview']);
@@ -58,3 +56,11 @@ Route::get('/get-review/{id_destinasi}', [ReviewController::class, 'getSpecificR
 Route::post('/create-review', [ReviewController::class, 'createReview']);
 Route::put('/update-review/{id_review}', [ReviewController::class, 'updateReview']);
 Route::delete('/delete-review/{id_review}', [ReviewController::class, 'deleteReview']);
+
+// Facilities
+Route::get('/get-facilities', [FacilitiesController::class, 'getFacilities']);
+Route::post('/get-facilities/{id_facilities}', [FacilitiesController::class, 'getSpecificFacilities']);
+Route::get('/get-facilities/{id_destinasi}', [FacilitiesController::class, 'getSpecificFacilitiesFromDestination']);
+Route::post('/create-facilities', [FacilitiesController::class, 'createFacilities']);
+Route::put('/update-facilities/{id_facilities}', [FacilitiesController::class, 'updateFacilities']);
+Route::delete('/delete-facilities/{id_facilities}', [FacilitiesController::class, 'deleteFacilities']);

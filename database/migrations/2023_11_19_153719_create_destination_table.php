@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('trending');
             $table->string('location');
             $table->longText('description')->nullable();
-            $table->longText('facilities')->nullable();
+            // $table->longText('facilities')->nullable();
             $table->timestamps();
             
             // Foreign key to itinerary table
