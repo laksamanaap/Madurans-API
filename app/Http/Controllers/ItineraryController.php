@@ -100,7 +100,7 @@ class ItineraryController extends Controller
         $destinationData = Destination::with('itinerary')->find($id_destinasi);
 
         return response()->json([
-            'data' => $destinationData,
+            'data' => $destinationData->itinerary,
         ]);
     }
 

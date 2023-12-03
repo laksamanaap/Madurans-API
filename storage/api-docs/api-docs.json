@@ -493,6 +493,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "id_destinasi": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
                                     "id_review": {
                                         "type": "integer",
                                         "example": "1"

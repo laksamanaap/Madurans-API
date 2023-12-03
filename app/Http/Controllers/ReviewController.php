@@ -61,7 +61,7 @@ class ReviewController extends Controller
         $reviewData = Destination::with('review')->find($id_destinasi);
 
         return response()->json([
-            'data' => $reviewData,
+            'data' => $reviewData->review,
         ]);
     }
 
