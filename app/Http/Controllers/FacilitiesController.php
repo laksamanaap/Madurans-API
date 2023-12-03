@@ -70,8 +70,7 @@ class FacilitiesController extends Controller
 public function createFacilities(Request $request) {
     $validator = Validator::make($request->all(), [
         'id_destinasi' => 'required|numeric',
-        'facility_name' => 'required|array',
-        'facility_name.*' => 'required|string', // Validate each item in the array
+        'facility_name' => 'required|array' // Validate each item in the array
     ]);
 
     if ($validator->fails()) {
@@ -83,13 +82,14 @@ public function createFacilities(Request $request) {
     $formData = $validator->validate();
     $formData['id_destinasi'] = $request->input('id_destinasi');
 
+    // dd($formData);
+
     $destination = Destination::find($formData['id_destinasi']);
 
     if (!$destination) {
         return response()->json(['error' => 'Destination not found.'], 404);
     } else {
         try {
-
             foreach ($formData['facility_name'] as $facilityName) {
             $facilities = Facilities::create([
                     'id_destinasi' => $formData['id_destinasi'],

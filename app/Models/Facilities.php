@@ -14,7 +14,11 @@ class Facilities extends Model
 
      protected $fillable = [
         'id_destinasi',
-        // 'facility_name'
+        'facility_name'
+    ];
+
+    protected $casts = [
+        'facility_name' => 'json',
     ];
 
     use HasFactory;
