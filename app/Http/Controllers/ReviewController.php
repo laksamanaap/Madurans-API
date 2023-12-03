@@ -130,13 +130,90 @@ class ReviewController extends Controller
                 return response()->json(['error' => 'Failed to create itinerary.'], 500);
             }
         }
+    }
 
-        // $reviewData = Review::create($formData);
 
-        // return response()->json([
-        //     'message' => 'Review created successfully.',
-        //     'data' => $reviewData
-        // ]);
+    /**
+     * @OA\Put(
+     *     path="/update-review/{id_review}",
+     *     tags={"Review"},
+     *     summary="Update Review",
+     *     @OA\RequestBody(
+     *          description= "- Update Review",
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id_review", type="int", example="1"),
+     *              @OA\Property(property="rating", type="float", example="4"),
+     *              @OA\Property(property="description", type="email", example="Review Description")
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="get token",
+     *      ),
+     *    )
+     *
+     *
+     */
+    public function updateReview(Request $request) {
+    
+       $requestData = $request->only([
+           'id_review',
+           'rating',
+           'description',
+       ]);
+
+       $id_review = $requestData['id_review'];
+       $rating = $requestData['rating'];
+       $description = $requestData['description'];
+
+       $Review = Review::find($id_review);
+       $Review->id_review = $id_review;
+       $Review->rating = $rating;
+       $Review->description = $description;
+
+       $Review->save();
+
+       return response()->json([
+           'message' => 'Review successfully updated',
+           'data' => $Review
+       ],200);
 
     }
+
+
+    /**
+     * @OA\delete(
+     *     path="/delete-review/{id_review}",
+     *     tags={"Review"},
+     *     summary="Delete review API's",
+     *     description="Delete review API's",
+     *     operationId="delete-review",
+     *       @OA\Parameter(
+     *          name="id_review",
+     *          description="id_review",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function deleteReview($id_review) {
+
+        $Review = Review::destroy($id_review);
+
+        return response()->json([
+            'message' => 'Review successfully deleted',
+            'data' => $Review
+        ]);
+    }
+
+
 }
