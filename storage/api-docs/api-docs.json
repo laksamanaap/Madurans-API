@@ -408,6 +408,32 @@
                 }
             }
         },
+        "/get-review/{id_review}": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Get specific review",
+                "description": "Get specific review",
+                "operationId": "get-specific-review",
+                "parameters": [
+                    {
+                        "name": "id_review",
+                        "in": "path",
+                        "description": "id_review",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-review/{id_destinasi}": {
             "get": {
                 "tags": [

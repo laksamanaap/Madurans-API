@@ -33,6 +33,49 @@ class ReviewController extends Controller
 
 
     /**
+     * @OA\Post(
+     *     path="/get-review/{id_review}",
+     *     tags={"Review"},
+     *     summary="Get specific review",
+     *     description="Get specific review",
+     *     operationId="get-specific-review",
+     *     
+     * @OA\Parameter(
+     *          name="id_review",
+     *          description="id_review",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * 
+     * 
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getSpecificReview($id) {
+
+        $reviewData = Review::with('users')->find($id);
+
+        if (!$reviewData) {
+            return response()->json([
+                'message' => 'There no reviews found!'
+            ],404);
+        } else {
+            return response()->json([
+                'data' => $reviewData
+            ]);
+        }
+
+
+    }
+
+
+    /**
      * @OA\Get(
      *     path="/get-review/{id_destinasi}",
      *     tags={"Review"},
