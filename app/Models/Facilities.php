@@ -22,5 +22,10 @@ class Facilities extends Model
         'facility_name' => 'json',
     ];
 
+    public function destinations() :BelongsTo
+    {
+        return $this->belongsTo(Destination::class, 'id_destinasi', 'id_destinasi');
+    }
+
     use HasFactory;
 }

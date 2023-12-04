@@ -101,11 +101,15 @@ class ReviewController extends Controller
      * )
      */
     public function getSpecificReviewFromDestination($id_destinasi) {
-        $reviewData = Destination::with('review')->find($id_destinasi);
+       $destination = Destination::find($id_destinasi);
 
-        return response()->json([
-            'data' => $reviewData->review,
-        ]);
+        if (!$destination) {
+            return response()->json(['message' => 'Destination not found!'], 404);
+        }
+
+        $reviews = Review::with('users')->where('id_destinasi', $id_destinasi)->get();
+
+        return response()->json(['data' => $reviews]);
     }
 
 

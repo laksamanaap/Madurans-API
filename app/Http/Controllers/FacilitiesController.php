@@ -32,7 +32,7 @@ class FacilitiesController extends Controller
 
 
     public function getSpecificFacilitiesFromDestination($id_destinasi) {
-        // $facilitiesData = Destination::with('facilities')->find($id_destinasi);
+        $facilitiesData = Destination::with('facilities')->find($id_destinasi);
     }
 
 
