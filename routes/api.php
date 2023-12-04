@@ -59,8 +59,8 @@ Route::delete('/delete-review/{id_review}', [ReviewController::class, 'deleteRev
 
 // Facilities
 Route::get('/get-facilities', [FacilitiesController::class, 'getFacilities']);
-Route::post('/get-facilities/{id_facilities}', [FacilitiesController::class, 'getSpecificFacilities']);
+Route::post('/get-facilities/{id_facility}', [FacilitiesController::class, 'getSpecificFacilities']);
 Route::get('/get-facilities/{id_destinasi}', [FacilitiesController::class, 'getSpecificFacilitiesFromDestination']);
 Route::post('/create-facilities', [FacilitiesController::class, 'createFacilities']);
-Route::put('/update-facilities/{id_facilities}', [FacilitiesController::class, 'updateFacilities']);
-Route::delete('/delete-facilities/{id_facilities}', [FacilitiesController::class, 'deleteFacilities']);
+Route::put('/update-facilities/{id_facility}', [FacilitiesController::class, 'updateFacilities']);
+Route::delete('/delete-facilities/{id_facility}', [FacilitiesController::class, 'deleteFacilities']);

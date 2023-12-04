@@ -259,6 +259,48 @@
                 }
             }
         },
+        "/update-facilities/{id_facility}": {
+            "put": {
+                "tags": [
+                    "Facilities"
+                ],
+                "summary": "Update Facility",
+                "operationId": "766d1a04200ab274bf84dd4f1abdc494",
+                "requestBody": {
+                    "description": "- Update Facility",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_facility": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "id_destinasi": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "facility_name": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "Sleeping Room"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get token"
+                    }
+                }
+            }
+        },
         "/get-itinerary": {
             "get": {
                 "tags": [

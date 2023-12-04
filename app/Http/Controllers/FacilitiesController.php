@@ -110,5 +110,69 @@ public function createFacilities(Request $request) {
 }
 
 
+    /**
+     * @OA\Put(
+     *     path="/update-facilities/{id_facility}",
+     *     tags={"Facilities"},
+     *     summary="Update Facility",
+     *     @OA\RequestBody(
+     *          description= "- Update Facility",
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id_facility", type="number", example="1"),
+     *              @OA\Property(property="id_destinasi", type="int", example="1"),
+     *              @OA\Property(
+     *                  property="facility_name",
+     *                  type="array",
+     *                  @OA\Items(type="string", example="Sleeping Room"),
+     *                  @OA\Items(type="string", example="Bathroom"),
+     *                  @OA\Items(type="string", example="Transport"),
+     *              ),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="get token",
+     *      ),
+     *    )
+     *
+     *
+     */
+    public function updateFacilities(Request $request) {
+        $requestData = $request->validate([
+            'id_facility' => 'required|numeric',
+            'id_destinasi' => 'required|numeric',
+            'facility_name' => 'required|array' 
+        ]);
+
+        $id_facility = $requestData['id_facility'];
+        $id_destinasi = $requestData['id_destinasi'];
+        $facility_name = $requestData['facility_name'];
+
+        $Facility = Facilities::find($id_facility);
+
+        if (!$Facility) {
+            return response()->json('Facility not found',404);
+        }
+
+        $Facility->id_facility = $id_facility;
+        $Facility->id_destinasi = $id_destinasi;
+        $Facility->facility_name = $facility_name;
+
+        $Facility->save();
+
+        return response()->json([
+           'message' => 'Facility successfully updated',
+           'data' => $Facility
+       ],200);
+    }
+
+
+    
+    public function deleteFacilities($id_facility) {
+        
+    }
+
 
 }

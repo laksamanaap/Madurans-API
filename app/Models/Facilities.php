@@ -14,6 +14,7 @@ class Facilities extends Model
 
      protected $fillable = [
         'id_destinasi',
+        'id_facilities',
         'facility_name'
     ];
 
