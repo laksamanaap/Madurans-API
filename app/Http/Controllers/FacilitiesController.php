@@ -47,13 +47,7 @@ class FacilitiesController extends Controller
  *          @OA\JsonContent(
  *              type="object",
  *              @OA\Property(property="id_destinasi", type="number", example="1"),
- *              @OA\Property(
- *                  property="facility_name",
- *                  type="array",
- *                  @OA\Items(type="string", example="Sleeping Room"),
- *                  @OA\Items(type="string", example="Bathroom"),
- *                  @OA\Items(type="string", example="Transport"),
- *              ),
+ *              @OA\Property(property="facility_name", type="string", example="Sleeping Bed")
  *          )
  *     ),
  *     @OA\Response(
@@ -75,7 +69,7 @@ class FacilitiesController extends Controller
 public function createFacilities(Request $request) {
     $validator = Validator::make($request->all(), [
         'id_destinasi' => 'required|numeric',
-        'facility_name' => 'required|array' // Validate each item in the array
+        'facility_name' => 'required|string'
     ]);
 
     if ($validator->fails()) {
@@ -87,7 +81,6 @@ public function createFacilities(Request $request) {
     $formData = $validator->validate();
     $formData['id_destinasi'] = $request->input('id_destinasi');
 
-    // dd($formData);
 
     $destination = Destination::find($formData['id_destinasi']);
 
@@ -95,15 +88,7 @@ public function createFacilities(Request $request) {
         return response()->json(['error' => 'Destination not found.'], 404);
     } else {
         try {
-            foreach ($formData['facility_name'] as $facilityName) {
-            $facilities = Facilities::create([
-                    'id_destinasi' => $formData['id_destinasi'],
-                    'facility_name' => $formData['facility_name'],
-                    'updated_at' => now(),
-                    'created_at' => now(),
-                ]);
-            }
-
+            $facilities = Facilities::create($formData);
             return response()->json([
                 'message' => 'Facilities successfully created',
                 'data' => $facilities

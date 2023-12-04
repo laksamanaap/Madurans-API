@@ -12,12 +12,6 @@ class Facilities extends Model
     protected $table = 'facilities';
     protected $guarded = [];
 
-     protected $fillable = [
-        'id_destinasi',
-        'id_facilities',
-        'facility_name'
-    ];
-
     protected $casts = [
         'facility_name' => 'json',
     ];

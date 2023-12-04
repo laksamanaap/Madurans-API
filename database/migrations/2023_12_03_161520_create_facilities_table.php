@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->id('id_facility');
             $table->unsignedBigInteger('id_destinasi');
-            $table->text('facility_name')->nullable(); 
-            $table->timestamps();
+            $table->json('facility_name')->nullable(); 
 
             // Foreign key to destination table
             $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');

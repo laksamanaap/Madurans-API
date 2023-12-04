@@ -234,11 +234,8 @@
                                         "example": "1"
                                     },
                                     "facility_name": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "example": "Sleeping Room"
-                                        }
+                                        "type": "string",
+                                        "example": "Sleeping Bed"
                                     }
                                 },
                                 "type": "object"
