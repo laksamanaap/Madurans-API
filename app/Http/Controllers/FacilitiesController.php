@@ -31,6 +31,11 @@ class FacilitiesController extends Controller
     }
 
 
+    public function getSpecificFacilitiesFromDestination($id_destinasi) {
+        // $facilitiesData = Destination::with('facilities')->find($id_destinasi);
+    }
+
+
  /**
  * @OA\Post(
  *     path="/create-facilities",
@@ -169,9 +174,36 @@ public function createFacilities(Request $request) {
     }
 
 
-    
+
+    /**
+     * @OA\delete(
+     *     path="/delete-facilities/{id_facility}",
+     *     tags={"Facilities"},
+     *     summary="Delete facilities API's",
+     *     description="Delete facilities API's",
+     *     operationId="delete-facilities",
+     *       @OA\Parameter(
+     *          name="id_facility",
+     *          description="id_facility",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function deleteFacilities($id_facility) {
-        
+        $Facility = Facilities::destroy($id_facility);
+
+        return response()->json([
+            'message' => 'Facility successfully deleted',
+            'data' => $Facility
+        ]);
     }
 
 

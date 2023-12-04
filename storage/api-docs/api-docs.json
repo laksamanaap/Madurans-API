@@ -301,6 +301,32 @@
                 }
             }
         },
+        "/delete-facilities/{id_facility}": {
+            "delete": {
+                "tags": [
+                    "Facilities"
+                ],
+                "summary": "Delete facilities API's",
+                "description": "Delete facilities API's",
+                "operationId": "delete-facilities",
+                "parameters": [
+                    {
+                        "name": "id_facility",
+                        "in": "path",
+                        "description": "id_facility",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-itinerary": {
             "get": {
                 "tags": [
