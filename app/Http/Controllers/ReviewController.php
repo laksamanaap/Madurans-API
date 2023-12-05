@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Review;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use OpenApi\Tests\Fixtures\Customer;
 use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
@@ -162,11 +164,15 @@ class ReviewController extends Controller
 
         $formData = $validator->validate();
         $formData['id_destinasi'] = $request->input('id_destinasi');
+        $formData['id_customer'] = $request->input('id_customer');
 
         $destination = Destination::find($formData['id_destinasi']);
+        $customer = User::find($formData['id_customer']);
 
         if (!$destination) {
             return response()->json(['error' => 'Destination not found.'], 404);
+        } else if(!$customer) { 
+            return response()->json(['error' => 'Customer not found.'], 404);
         } else {
             try {
                 $review = Review::create($formData);

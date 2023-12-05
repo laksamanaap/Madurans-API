@@ -87,7 +87,15 @@ class DestinationController extends Controller
                     'itinerary_description' => $itinerary->itinerary_description
                 ];
             }),
-            'reviews' => $destinationData->review,
+            'reviews' => $destinationData->review->map(function($review) {
+                return [
+                    'id_review' => $review->id_review,
+                    'rating' => $review->rating,
+                    'description' => $review->description,
+                    'users' => $review->users,
+
+                ]; 
+            }),
         ];
 
         return response()->json(['data' => $response]);
@@ -141,7 +149,6 @@ class DestinationController extends Controller
             'trending' => 'required|boolean',
             'location' => 'required|string',
             'description' => 'required|string',
-            // 'facilities' => 'required|string'
         ]);
 
         if ($validator->fails()) {
