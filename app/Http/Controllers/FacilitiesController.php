@@ -31,9 +31,52 @@ class FacilitiesController extends Controller
     }
 
 
+     /**
+     * @OA\Get(
+     *     path="/get-facilities/{id_destinasi}",
+     *     tags={"Facilities"},
+     *     summary="Get specific facilities",
+     *     description="Get specific facilities",
+     *     operationId="get-specific-facilities",
+     *     
+     * @OA\Parameter(
+     *          name="id_destinasi",
+     *          description="id_destinasi",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * 
+     * 
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function getSpecificFacilitiesFromDestination($id_destinasi) {
-        $facilitiesData = Destination::with('facilities')->find($id_destinasi);
+    $destination = Destination::with('facilities')->find($id_destinasi);
+
+    if (!$destination) {
+        return response()->json([
+            'message' => 'Destination not found',
+        ],404);
+    } else {
+        $response = [
+            'id_destinasi' => $id_destinasi,
+            'facilities' => $destination->facilities->map(function ($facility) {
+                return [
+                    'id_facility' => $facility->id_facility,
+                    'facility_name' => $facility->facility_name
+                ];
+            }),
+        ];
+        return response()->json($response);   
     }
+
+ }
 
 
  /**

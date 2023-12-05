@@ -215,6 +215,32 @@
                 }
             }
         },
+        "/get-facilities/{id_destinasi}": {
+            "get": {
+                "tags": [
+                    "Facilities"
+                ],
+                "summary": "Get specific facilities",
+                "description": "Get specific facilities",
+                "operationId": "get-specific-facilities",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/create-facilities": {
             "post": {
                 "tags": [

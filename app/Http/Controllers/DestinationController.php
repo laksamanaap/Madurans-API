@@ -56,16 +56,41 @@ class DestinationController extends Controller
      */
     public function getSpecificDestinations($id)
     {
-        $destinationData = Destination::with('facilities','itinerary','review.users')
+        $destinationData = Destination::with('facilities', 'itinerary', 'review.users')
         ->where('destination.id_destinasi', $id)
         ->first();
 
-          if (!$destinationData) {
+    if (!$destinationData) {
         return response()->json(['message' => 'No destination found for the specified id_destinasi'], 404);
-         } else {
-        return response()->json([
-            'data' => $destinationData
-        ]);
+    } else {
+        $response = [
+            'id_destinasi' => intval($id),
+            'images' => $destinationData->images,
+            'title' => $destinationData->title,
+            'rating' => $destinationData->rating,
+            'trending' => $destinationData->trending,
+            'location' => $destinationData->location,
+            'description' => $destinationData->description,
+            'created_at' => $destinationData->created_at,
+            'updated_at' => $destinationData->updated_at,
+            'facilities' => $destinationData->facilities->map(function ($facility) {
+                return [
+                    'id_facility' => $facility->id_facility,
+                    'facility_name' => $facility->facility_name
+                ];
+            }),
+            'itineraries' => $destinationData->itinerary->map(function ($itinerary) {
+                return [
+                    'id_itinerary' => $itinerary->id_itinerary,
+                    'itinerary_day' => $itinerary->itinerary_day,
+                    'itinerary_location_description' => $itinerary->itinerary_location_description,
+                    'itinerary_description' => $itinerary->itinerary_description
+                ];
+            }),
+            'reviews' => $destinationData->review,
+        ];
+
+        return response()->json(['data' => $response]);
     }
 
     }

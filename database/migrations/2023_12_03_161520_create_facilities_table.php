@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_facility');
             $table->unsignedBigInteger('id_destinasi');
             $table->json('facility_name')->nullable(); 
+            $table->timestamps();
 
             // Foreign key to destination table
             $table->foreign('id_destinasi')->references('id_destinasi')->on('destination');
