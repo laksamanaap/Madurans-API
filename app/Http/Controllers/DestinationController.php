@@ -6,6 +6,7 @@ use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
@@ -76,9 +77,15 @@ class DestinationController extends Controller
             'description' => $destinationData->description,
             'created_at' => $destinationData->created_at,
             'updated_at' => $destinationData->updated_at,
-            'destination_images' => $destinationData->destinationImage,
-            'facilities' => $destinationData->facilities->map(function ($facility) {
+            'destination_images' => $destinationData->destinationImage->map(function ($image) {
                 return [
+                    'id_destination_image' => $image->id_destination_images,
+                    'image' => Storage::disk('public')->url($image->icon),
+
+                ]; 
+            }),
+            'facilities' => $destinationData->facilities->map(function ($facility) {
+                return [ 
                     'id_facility' => $facility->id_facility,
                     'facility_name' => $facility->facility_name
                 ];

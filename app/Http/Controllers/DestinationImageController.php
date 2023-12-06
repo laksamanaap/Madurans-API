@@ -28,7 +28,12 @@ class DestinationImageController extends Controller
          *              @OA\Property(
          *                  property="images",
          *                  type="array",
-         *                  example={"base_64string", "base_64string"},
+         *                  example={
+         *                  "base_64string", 
+         *                  "base_64string",
+         *                  "base_64string",
+         *                  "base_64string"
+         *                   },
          *                  @OA\Items(type="string"),
          *              ),
          *          )

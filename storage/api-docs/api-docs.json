@@ -226,6 +226,8 @@
                                         },
                                         "example": [
                                             "base_64string",
+                                            "base_64string",
+                                            "base_64string",
                                             "base_64string"
                                         ]
                                     }
