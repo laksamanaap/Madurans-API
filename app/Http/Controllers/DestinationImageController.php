@@ -127,4 +127,41 @@ class DestinationImageController extends Controller
                 'data' =>  $new_partner_image   
             ],200);
         }
+
+
+         /**
+     * @OA\Post(
+     *     path="/get-images/{id_destinasi}",
+     *     tags={"Destination Image"},
+     *     summary="Get images destinations",
+     *     description="Get images destinations",
+     *     operationId="get-specific-imagesDestination",
+     *     
+     * @OA\Parameter(
+     *          name="id_destinasi",
+     *          description="id_destinasi",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * 
+     * 
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+        public function getImages($id_destinasi) {
+
+            $DestinationImageData = Destination::with('destinationImage')->find($id_destinasi);
+
+            return response()->json([
+                'message' => 'Succesfully get destination images',
+                'data' =>  $DestinationImageData
+            ]);
+
+        }
 }

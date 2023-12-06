@@ -24,7 +24,7 @@ class DestinationController extends Controller
      * )
      */
     public function getDestinations() {
-      $destination = Destination::with('itinerary','review','facilities')->get();
+      $destination = Destination::with('itinerary','review','facilities','destinationImage')->get();
 
       return response()->json($destination);
     }
@@ -56,9 +56,12 @@ class DestinationController extends Controller
      */
     public function getSpecificDestinations($id)
     {
-        $destinationData = Destination::with('facilities', 'itinerary', 'review.users')
+        $destinationData = Destination::with('destinationImage','facilities', 'itinerary', 'review.users')
         ->where('destination.id_destinasi', $id)
         ->first();
+        
+
+        // dd($destinationData);
 
     if (!$destinationData) {
         return response()->json(['message' => 'No destination found for the specified id_destinasi'], 404);
@@ -73,6 +76,7 @@ class DestinationController extends Controller
             'description' => $destinationData->description,
             'created_at' => $destinationData->created_at,
             'updated_at' => $destinationData->updated_at,
+            'destination_images' => $destinationData->destinationImage,
             'facilities' => $destinationData->facilities->map(function ($facility) {
                 return [
                     'id_facility' => $facility->id_facility,
@@ -98,7 +102,7 @@ class DestinationController extends Controller
             }),
         ];
 
-        return response()->json(['data' => $response]);
+        return response()->json(['data' => $response], 200);
     }
 
     }

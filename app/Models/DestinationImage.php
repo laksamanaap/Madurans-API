@@ -12,5 +12,10 @@ class DestinationImage extends Model
     protected $table = 'destination_image';
     protected $guarded = [];
 
+    public function destination() :BelongsTo
+    {
+        return $this->belongsTo(Destination::class, 'id_destinasi', 'id_destinasi');
+    }
+
     use HasFactory;
 }

@@ -251,6 +251,32 @@
                 }
             }
         },
+        "/get-images/{id_destinasi}": {
+            "post": {
+                "tags": [
+                    "Destination Image"
+                ],
+                "summary": "Get images destinations",
+                "description": "Get images destinations",
+                "operationId": "get-specific-imagesDestination",
+                "parameters": [
+                    {
+                        "name": "id_destinasi",
+                        "in": "path",
+                        "description": "id_destinasi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/get-facilities": {
             "get": {
                 "tags": [
