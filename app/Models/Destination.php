@@ -14,19 +14,19 @@ class Destination extends Model
     
     protected $primaryKey = 'id_destinasi';
     protected $table = 'destination';
-    protected $guarded = [];
+        protected $guarded = [];
 
-    
-      protected $fillable = [
-        'id_itinerary',
-        'images',
-        'title',
-        'rating',
-        'trending',
-        'location',
-        'description',
-        'facilities',
-    ];
+        
+        protected $fillable = [
+            'id_itinerary',
+            'images',
+            'title',
+            'rating',
+            'trending',
+            'location',
+            'description',
+            'facilities',
+        ];
 
     public function itinerary() :HasMany
     {
