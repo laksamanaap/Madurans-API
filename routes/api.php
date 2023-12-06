@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\DestinationImageController;
 
 
 /*
@@ -64,3 +65,6 @@ Route::get('/get-facilities/{id_destinasi}', [FacilitiesController::class, 'getS
 Route::post('/create-facilities', [FacilitiesController::class, 'createFacilities']);
 Route::put('/update-facilities/{id_facility}', [FacilitiesController::class, 'updateFacilities']);
 Route::delete('/delete-facilities/{id_facility}', [FacilitiesController::class, 'deleteFacilities']);
+
+// Store Images
+Route::post('/store-images', [DestinationImageController::class, 'storeImages']);

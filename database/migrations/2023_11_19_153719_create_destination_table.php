@@ -19,9 +19,9 @@ return new class extends Migration
             $table->boolean('trending');
             $table->string('location');
             $table->longText('description')->nullable();
-            // $table->longText('facilities')->nullable();
+            $table->smallInteger('soft_delete')->default(0);
             $table->timestamps();
-            
+    
             // Foreign key to itinerary table
             // $table->unsignedBigInteger('id_itinerary')->nullable(); // Foreign key to itinerary table
             // $table->foreign('id_itinerary')->references('id_itinerary')->on('itinerary');
