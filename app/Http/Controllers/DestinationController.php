@@ -25,9 +25,54 @@ class DestinationController extends Controller
      * )
      */
     public function getDestinations() {
-      $destination = Destination::with('itinerary','review','facilities','destinationImage')->get();
+    
+         $destinations = Destination::with('destinationImage', 'itinerary', 'review', 'facilities')
+        ->get();
 
-      return response()->json($destination);
+        $response = $destinations->map(function ($destination) {
+            return [
+                'id_destinasi' => $destination->id_destinasi,
+                'images' => $destination->images,
+                'title' => $destination->title,
+                'rating' => $destination->rating,
+                'trending' => $destination->trending,
+                'location' => $destination->location,
+                'description' => $destination->description,
+                'created_at' => $destination->created_at,
+                'updated_at' => $destination->updated_at,
+                'soft_delete' => $destination->soft_delete,
+                'destination_images' => $destination->destinationImage->map(function ($image) {
+                    return [
+                        'id_destination_image' => $image->id_destination_images,
+                        'image' => Storage::disk('public')->url($image->icon),
+                    ];
+                }),
+                'facilities' => $destination->facilities->map(function ($facility) {
+                    return [
+                        'id_facility' => $facility->id_facility,
+                        'facility_name' => $facility->facility_name
+                    ];
+                }),
+                'itineraries' => $destination->itinerary->map(function ($itinerary) {
+                    return [
+                        'id_itinerary' => $itinerary->id_itinerary,
+                        'itinerary_day' => $itinerary->itinerary_day,
+                        'itinerary_location_description' => $itinerary->itinerary_location_description,
+                        'itinerary_description' => $itinerary->itinerary_description
+                    ];
+                }),
+                'reviews' => $destination->review->map(function ($review) {
+                    return [
+                        'id_review' => $review->id_review,
+                        'rating' => $review->rating,
+                        'description' => $review->description,
+                        'users' => $review->users,
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json($response, 200);
     }
 
      /**
