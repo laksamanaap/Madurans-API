@@ -70,3 +70,6 @@ Route::delete('/delete-facilities/{id_facility}', [FacilitiesController::class, 
 Route::post('/store-images', [DestinationImageController::class, 'storeImages']);
 Route::post('/get-images/{id_destinasi}', [DestinationImageController::class, 'getImages']);
 
+// Search Controller
+Route::get('/search', [SearchController::class, 'search']);
+
