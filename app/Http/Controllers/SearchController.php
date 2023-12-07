@@ -21,13 +21,16 @@ class SearchController extends Controller
      *         description="Search query",
      *         @OA\Schema(type="string"),
      *     ),
+     *      @OA\Parameter(
+     *         name="rating",
+     *         in="query",
+     *         required=true,
+     *         description="Search rating",
+     *         @OA\Schema(type="number"),
+     *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Successful search",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="results", type="array", @OA\Items(ref="#/components/schemas/Product")),
-     *         ),
+     *         description="Successful search"
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -35,10 +38,11 @@ class SearchController extends Controller
      *     ),
      * )
      */
-    public function search(Request $request)
+     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'query' => 'required|string',
+            'rating' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -46,11 +50,17 @@ class SearchController extends Controller
         }
 
         $query = $request->input('query');
+        $rating = $request->input('rating');
 
-        $results = Destination::where('name', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
-            ->get();
+        $results = Destination::where(function ($queryBuilder) use ($query, $rating) {
+            $queryBuilder->where('title', 'like', '%' . $query . '%')
+                ->orWhere('rating', '>=', $rating);
+        })->get();
 
-        return response()->json(['results' => $results]);
+        if ($results->isEmpty()) {
+            return response()->json(['messages' => ['No data found with your query!']]);
+        } else {
+            return response()->json(['data' => $results]);
+        }
     }
 }
