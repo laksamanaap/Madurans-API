@@ -52,10 +52,12 @@ class SearchController extends Controller
         $query = $request->input('query');
         $rating = $request->input('rating');
 
-        $results = Destination::where(function ($queryBuilder) use ($query, $rating) {
+        $results = Destination::with(['destinationImage', 'facilities', 'itinerary', 'review.users'])
+        ->where(function ($queryBuilder) use ($query, $rating) {
             $queryBuilder->where('title', 'like', '%' . $query . '%')
                 ->orWhere('rating', '>=', $rating);
-        })->get();
+        })
+        ->get();
 
         if ($results->isEmpty()) {
             return response()->json(['messages' => ['No data found with your query!']]);
