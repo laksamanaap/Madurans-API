@@ -105,9 +105,6 @@ class DestinationController extends Controller
         $destinationData = Destination::with('destinationImage','facilities', 'itinerary', 'review.users')
         ->where('destination.id_destinasi', $id)
         ->first();
-        
-
-        // dd($destinationData);
 
     if (!$destinationData) {
         return response()->json(['message' => 'No destination found for the specified id_destinasi'], 404);
