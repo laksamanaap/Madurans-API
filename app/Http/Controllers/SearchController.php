@@ -54,9 +54,9 @@ class SearchController extends Controller
         $rating = $request->input('rating');
 
         $results = Destination::with(['destinationImage', 'facilities', 'itinerary', 'review.users'])
-        ->where(function ($queryBuilder) use ($query, $rating) {
-            $queryBuilder->where('title', 'like', '%' . $query . '%')
-                ->where('rating', '>=', $rating);
+        ->where('title', 'like', '%' . $query . '%')
+        ->when($rating >= 1, function ($queryBuilder) use ($rating) {
+            $queryBuilder->where('rating', '=', $rating);
         })
         ->get();
 

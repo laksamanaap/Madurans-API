@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_destinasi');
             $table->binary('images');
             $table->string('title');
-            $table->float('rating');
+            $table->integer('rating');
             $table->boolean('trending');
             $table->string('location');
             $table->longText('description')->nullable();

@@ -85,7 +85,7 @@
                                     "rating": {
                                         "type": "number",
                                         "format": "float",
-                                        "example": "4.6"
+                                        "example": "5"
                                     },
                                     "trending": {
                                         "type": "boolean",

@@ -169,7 +169,7 @@ class DestinationController extends Controller
      *              type="object",
      *              @OA\Property(property="images", type="string", example="base64_image_1"),
      *              @OA\Property(property="title", type="email", example="Kerapan Sapi"),
-     *              @OA\Property(property="rating", type="float", example="4.6"),
+     *              @OA\Property(property="rating", type="float", example="5"),
      *              @OA\Property(property="trending", type="boolean", example=true),
      *              @OA\Property(property="location", type="string", example="Pamekasan, Madura"),
      *              @OA\Property(property="description", type="string", 
