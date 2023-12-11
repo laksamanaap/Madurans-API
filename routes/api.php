@@ -69,6 +69,7 @@ Route::delete('/delete-facilities/{id_facility}', [FacilitiesController::class, 
 
 // Store Images
 Route::post('/store-images', [DestinationImageController::class, 'storeImages']);
+Route::post('/update-images', [DestinationImageController::class, 'updateImages']);
 Route::post('/get-images/{id_destinasi}', [DestinationImageController::class, 'getImages']);
 
 // Search Controller

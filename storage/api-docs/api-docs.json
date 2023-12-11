@@ -205,8 +205,8 @@
                 "tags": [
                     "Destination Image"
                 ],
-                "summary": "Store partner images settings",
-                "description": "Returns partner images settings data",
+                "summary": "Store destination images settings",
+                "description": "Returns destination images settings data",
                 "operationId": "storeDestinationsImages",
                 "requestBody": {
                     "description": "<b>Note:</b><br> - <b>id_destinasi</b> is required.",
@@ -805,7 +805,7 @@
                 "tags": [
                     "Search"
                 ],
-                "summary": "Search for products",
+                "summary": "Search for destination",
                 "operationId": "4724040b63b941e77f510ebfaf0d95a1",
                 "parameters": [
                     {

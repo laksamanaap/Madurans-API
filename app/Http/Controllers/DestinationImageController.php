@@ -17,8 +17,8 @@ class DestinationImageController extends Controller
          *      path="/store-images",
          *      operationId="storeDestinationsImages",
          *      tags={"Destination Image"},
-         *      summary="Store partner images settings",
-         *      description="Returns partner images settings data",
+         *      summary="Store destination images settings",
+         *      description="Returns destination images settings data",
          *      @OA\RequestBody(
          *          description="<b>Note:</b><br> - <b>id_destinasi</b> is required.",
          *          required=true,
@@ -163,9 +163,24 @@ class DestinationImageController extends Controller
 
             $DestinationImageData = Destination::with('destinationImage')->find($id_destinasi);
 
+            $response = [
+                'id_destinasi' => $DestinationImageData->id_destinasi,
+                'title' => $DestinationImageData->title,
+                'rating' => $DestinationImageData->rating,
+                'trending' => $DestinationImageData->trending,
+                'location' => $DestinationImageData->location,
+                'description' => $DestinationImageData->description,
+                'destinasion_images' => $DestinationImageData->destinationImage->map(function ($image) {
+                    return [
+                        'id_destination_image' => $image->id_destination_images,
+                        'image' => Storage::disk('public')->url($image->icon),
+                    ];
+                })
+            ];
+
             return response()->json([
                 'message' => 'Succesfully get destination images',
-                'data' =>  $DestinationImageData
+                'data' =>  $response
             ]);
 
         }
